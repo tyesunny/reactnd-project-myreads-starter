@@ -1,31 +1,19 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListBooks from './ListBooks'
 import SearchBook from './SearchBook'
 
 /* Render Bookshelf page */
 class BooksApp extends React.Component {
-  // state variable, store books to be rendered in UI
-  state = {
-    books: []
-  }
-  // place to execute AJAX request
-  componentDidMount() {
-    // Call API to fetch all books when componentDidMount
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
-    })
-  }
 
-  render() {
-    console.log(this.state.books) // for debug
+  render()
+  {
     return (
       <div className="app">
+        {/* show main page */}
         <Route exact path='/' render={() => (
-
           <div className="list-books">
             {/* title */}
             <div className="list-books-title">
@@ -33,7 +21,7 @@ class BooksApp extends React.Component {
             </div>
             {/* book list. dynamically rendered by react children */}
             <div className="list-books-content">
-              <ListBooks books={this.state.books} />
+              <ListBooks />
             </div>
             {/* search button */}
             <div className="open-search">
@@ -43,8 +31,8 @@ class BooksApp extends React.Component {
             </div>
           </div>
         )}/>
+        {/* show SearchBook page */}
         <Route path='/search' render={() => (
-          /* show SearchBook page */
           <SearchBook />
         )}/>
       </div>

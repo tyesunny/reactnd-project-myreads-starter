@@ -1,13 +1,29 @@
 import React, { Component } from 'react';
 import ListOneBook from './ListOneBook'
+import * as BooksAPI from './BooksAPI'
 
 
 class ListBooks extends Component
 {
+  // state variable, store books to be rendered in UI
+  state = {
+    books: []
+  }
+  // place to execute AJAX request
+  componentDidMount() {
+    // Call API to fetch all books when componentDidMount
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books: books })
+    })
+  }
+
   // return books on specified shelfName
   booksOnShelf = (shelfName) => (
-    this.props.books.filter( (book) => book.shelf === shelfName)
+    this.state.books.filter( (book) => book.shelf === shelfName)
   )
+
+  // change book.shelf
+
 
   render()
   {

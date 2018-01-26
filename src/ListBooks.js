@@ -13,7 +13,7 @@ class ListBooks extends Component
   {
     return (
       <div>
-        /* first bookshelf: currently reading */
+        {/* first bookshelf: currently reading */}
         <div className="bookshelf">
           <h2 className="bookshelf-title">Currently Reading</h2>
           <div className="bookshelf-books">
@@ -24,7 +24,7 @@ class ListBooks extends Component
             </ol>
           </div>
         </div>
-        /* second bookshelf: want to read */
+        {/* second bookshelf: want to read */}
         <div className="bookshelf">
           <h2 className="bookshelf-title">Want to Read</h2>
           <div className="bookshelf-books">
@@ -35,7 +35,7 @@ class ListBooks extends Component
             </ol>
           </div>
         </div>
-        /* third bookshelf: read */
+        {/* third bookshelf: read */}
         <div className="bookshelf">
           <h2 className="bookshelf-title">Read</h2>
           <div className="bookshelf-books">

@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ListOneBook from './ListOneBook'
 
-
-
+// In this component we render books coming from a user query
+// Required props
+//  booksAlreadyPicked
+//  func updateShelf (newBook, shelfName)
 class SearchBook extends Component {
   state = {
     query: '',

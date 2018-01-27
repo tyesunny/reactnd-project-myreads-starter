@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import ListOneBook from './ListOneBook'
 
-
+// In this component we render books that user has picked, searate them into different shelves respectively
+// Required props
+//  func getBooksOnShelf(book, shelf)
+//  func updateShelf(newBook, shelfName)
 class ListBooks extends Component
 {
   render()
   {
+    // props from App compnent
     const {getBooksOnShelf, updateShelf} = this.props;
     return (
       <div>
@@ -60,7 +64,3 @@ class ListBooks extends Component
 }
 
 export default ListBooks
-
-// TODO
-// render createbook page
-// add function

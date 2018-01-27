@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
-
+// In this component we render a book
+// Required props
+//  book: the book to render
+//  func updateShelf (newBook, shelfName)
 class ListOneBook extends Component {
 
   render() {

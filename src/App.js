@@ -79,7 +79,3 @@ class BooksApp extends React.Component {
 }
 
 export default BooksApp
-
-
-//TODO:
-// feat: Search

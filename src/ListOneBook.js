@@ -3,12 +3,9 @@ import React, { Component } from 'react';
 
 class ListOneBook extends Component {
 
-
   render() {
     const { book, updateShelf } = this.props
     const coverImg = book.imageLinks.thumbnail
-    const currentShelf = book.shelf
-
 
     return (
       <li>
@@ -17,7 +14,7 @@ class ListOneBook extends Component {
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${coverImg})` }}></div>
             <div className="book-shelf-changer">
               <select
-                defaultValue={currentShelf}
+                defaultValue={(book.shelf) ? (book.shelf) : "none" }
                 onChange={ (e) => updateShelf(book, e.target.value) }>
                   <option value="none" disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>

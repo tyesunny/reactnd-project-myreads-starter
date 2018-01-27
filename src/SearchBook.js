@@ -1,10 +1,40 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
+import ListOneBook from './ListOneBook'
+
+
 
 class SearchBook extends Component {
+  state = {
+    query: '',
+    books: []
+  }
+
+  updateQuery = (query) => {
+    if (!query)
+    {
+      // if query = ''
+      this.setState({query: '', books: []})
+    }
+    else
+    {
+      // if valid query, update the state variable
+      this.setState({ query: query.trim() })
+      BooksAPI.search(query)
+      .then((queriedBooks) => {
+        // update the queried books's shelf to the one user has set
+        queriedBooks.map(queriedBook => (
+          this.props.booksAlreadyPicked.filter((b) => b.id === queriedBook.id).map(b => queriedBook.shelf = b.shelf)
+        ))
+        this.setState({books: queriedBooks})
+      })
+    }
+  }
 
   render()
   {
+    const {updateShelf} = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -13,24 +43,29 @@ class SearchBook extends Component {
             to="/"
             >Close</Link>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
-            <input type="text" placeholder="Search by title or author"/>
-
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              onChange={ (e) => this.updateQuery(e.target.value) }
+            />
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {this.state.books.map( (book) => (
+              <ListOneBook
+                book={book}
+                key={book.id}
+                updateShelf={updateShelf}
+              />
+            ))}
+          </ol>
         </div>
       </div>
     )
   }
 }
+
+
 
 export default SearchBook

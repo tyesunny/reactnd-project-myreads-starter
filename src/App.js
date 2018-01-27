@@ -44,5 +44,4 @@ export default BooksApp
 
 
 //TODO:
-// feat: move books from bookshelf
 // feat: Search

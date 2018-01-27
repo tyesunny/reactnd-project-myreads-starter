@@ -23,6 +23,18 @@ class ListBooks extends Component
   )
 
   // change book.shelf
+  updateShelf = (newBook, shelfName) => {
+    BooksAPI.update(newBook, shelfName).then(response => {
+      // only update the state variable after the backend is updated
+      // update the shelf for this book, it is also reflected in class state
+      newBook.shelf = shelfName
+      // get list of other books
+      const updatedBooks = this.state.books.filter( book => book.id !== newBook.id )
+      // add new book to array and set new state
+      updatedBooks.push(newBook);
+      this.setState({ books: updatedBooks })
+    })
+  }
 
 
   render()
@@ -35,7 +47,10 @@ class ListBooks extends Component
           <div className="bookshelf-books">
             <ol className="books-grid">
               {this.booksOnShelf("currentlyReading").map( (book) => (
-                <ListOneBook book={book} key={book.id} />
+                <ListOneBook book={book}
+                  key={book.id}
+                  updateShelf={this.updateShelf}
+                />
               ))}
             </ol>
           </div>
@@ -46,7 +61,10 @@ class ListBooks extends Component
           <div className="bookshelf-books">
             <ol className="books-grid">
               {this.booksOnShelf("wantToRead").map( (book) => (
-                <ListOneBook book={book} key={book.id} />
+                <ListOneBook book={book}
+                  key={book.id}
+                  updateShelf={this.updateShelf}
+                />
               ))}
             </ol>
           </div>
@@ -57,7 +75,10 @@ class ListBooks extends Component
           <div className="bookshelf-books">
             <ol className="books-grid">
               {this.booksOnShelf("read").map( (book) => (
-                <ListOneBook book={book} key={book.id} />
+                <ListOneBook book={book}
+                  key={book.id}
+                  updateShelf={this.updateShelf}
+                />
               ))}
             </ol>
           </div>
@@ -70,6 +91,5 @@ class ListBooks extends Component
 export default ListBooks
 
 // TODO
-// render bookshelf page
 // render createbook page
 // add function
